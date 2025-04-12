@@ -1,0 +1,131 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s ease;
+}
+
+.notepad-container {
+    width: 600px;
+    height: 550px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.notepad-header {
+    background-color: #0078d4;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notepad-header button {
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.notepad-header button:hover {
+    background-color: #005a99;
+}
+
+.notepad-body {
+    flex: 1;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ccc;
+}
+
+.notepad-body textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: white;
+}
+
+.dark-mode .notepad-header {
+    background-color: #222;
+}
+
+.dark-mode .notepad-body {
+    background-color: #444;
+}
+
+.word-count {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+.search-replace-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.search-replace-container input {
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.search-replace-container button {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.search-replace-container button:hover {
+    background-color: #005a99;
+}
+
+.status-message {
+    margin-top: 10px;
+    color: green;
+    font-size: 14px;
+    display: none;
+}
+
+.status-message.error {
+    color: red;
+}
