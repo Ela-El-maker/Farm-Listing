@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Notepad with Word Export</title>
+  <link rel="stylesheet" href="../assets/css/notepad.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/6.0.0-beta.5/docx.min.js"></script>
+</head>
+<body>
+  <div class="notepad-container">
+    <div class="notepad-header">
+      <span>Notepad</span>
+      <div>
+        <button id="darkModeBtn">Dark Mode</button>
+        <button id="undoBtn" disabled>Undo</button>
+        <button id="redoBtn" disabled>Redo</button>
+        <button id="saveBtn">Save</button>
+        <button id="downloadBtn">Download</button>
+        <button id="exportWordBtn">Export as Word</button>
+      </div>
+    </div>
+    <div class="notepad-body">
+      <textarea id="textArea" placeholder="Type here..." oninput="updateWordCount()"></textarea>
+    </div>
+    <div class="search-replace-container">
+      <input type="text" id="searchInput" placeholder="Search...">
+      <button id="searchBtn">Search</button>
+      <input type="text" id="replaceInput" placeholder="Replace...">
+      <button id="replaceBtn">Replace</button>
+    </div>
+    <div class="word-count" id="wordCount">Word Count: 0</div>
+    <div class="status-message" id="statusMessage">Action completed successfully.</div>
+  </div>
+
+  <script>
+    // Variables to hold undo and redo stack
+    let undoStack = [];
+    let redoStack = [];
+    const textArea = document.getElementById('textArea');
+    const statusMessage = document.getElementById('statusMessage');
+
+    // Save the current state to undo stack
+    function saveStateToUndoStack() {
+      undoStack.push(textArea.value);
+      document.getElementById('undoBtn').disabled = false; // Enable undo button
+      document.getElementById('redoBtn').disabled = true; // Disable redo button
+    }
+
+    // Undo functionality
+    document.getElementById('undoBtn').addEventListener('click', function() {
+      if (undoStack.length > 0) {
+        redoStack.push(textArea.value); // Save current state to redo stack
+        textArea.value = undoStack.pop(); // Get last saved state from undo stack
+        document.getElementById('redoBtn').disabled = false; // Enable redo button
+        if (undoStack.length === 0) {
+          document.getElementById('undoBtn').disabled = true; // Disable undo button if stack is empty
+        }
+      }
+    });
+
+    // Redo functionality
+    document.getElementById('redoBtn').addEventListener('click', function() {
+      if (redoStack.length > 0) {
+        undoStack.push(textArea.value); // Save current state to undo stack
+        textArea.value = redoStack.pop(); // Get last saved state from redo stack
+        document.getElementById('undoBtn').disabled = false; // Enable undo button
+        if (redoStack.length === 0) {
+          document.getElementById('redoBtn').disabled = true; // Disable redo button if stack is empty
+        }
+      }
+    });
+
+    // Trigger save on input change
+    textArea.addEventListener('input', function() {
+      saveStateToUndoStack();
+      updateWordCount();
+    });
+
+    // Toggle Dark Mode
+    document.getElementById('darkModeBtn').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    // Save content locally as a .txt file
+    document.getElementById('saveBtn').addEventListener('click', function() {
+      const content = textArea.value;
+      const blob = new Blob([content], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'notepad.txt';
+      link.click();
+      showStatusMessage("File saved successfully.");
+    });
+
+    // Download content as a .txt file
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      const content = textArea.value;
+      const blob = new Blob([content], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'notepad.txt';
+      link.click();
+      showStatusMessage("File downloaded successfully.");
+    });
+
+    // Word count functionality
+    function updateWordCount() {
+      const content = textArea.value;
+      const wordCount = content.trim().split(/\s+/).length;
+      document.getElementById('wordCount').textContent = `Word Count: ${wordCount}`;
+    }
+
+    // Show status message
+    function showStatusMessage(message) {
+      statusMessage.textContent = message;
+      statusMessage.style.display = "block";
+      setTimeout(function() {
+        statusMessage.style.display = "none";
+      }, 2000);
+    }
+
+    // Search functionality
+    document.getElementById('searchBtn').addEventListener('click', function() {
+      const searchTerm = document.getElementById('searchInput').value;
+      const content = textArea.value;
+      const index = content.indexOf(searchTerm);
+      if (index !== -1) {
+        alert(`Found "${searchTerm}" at position ${index}`);
+      } else {
+        alert(`"${searchTerm}" not found`);
+      }
+    });
+
+    // Replace functionality
+    document.getElementById('replaceBtn').addEventListener('click', function() {
+      const searchTerm = document.getElementById('searchInput').value;
+      const replaceTerm = document.getElementById('replaceInput').value;
+      const content = textArea.value;
+      if (content.includes(searchTerm)) {
+        textArea.value = content.replace(searchTerm, replaceTerm);
+        showStatusMessage(`Replaced "${searchTerm}" with "${replaceTerm}"`);
+      } else {
+        showStatusMessage(`"${searchTerm}" not found`);
+      }
+    });
+
+    // Export content as Word Document
+    document.getElementById('exportWordBtn').addEventListener('click', function() {
+      const doc = new docx.Document({
+        sections: [
+          {
+            properties: {},
+            children: [
+              new docx.Paragraph({
+                text: textArea.value,
+                heading: docx.HeadingLevel.HEADING_1,
+              }),
+            ],
+          },
+        ],
+      });
+
+      docx.Packer.toBlob(doc).then((blob) => {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'notepad.docx';
+        link.click();
+        showStatusMessage("Word document exported successfully.");
+      });
+    });
+
+    // Autosave every 30 seconds
+    setInterval(function() {
+      const content = textArea.value;
+      localStorage.setItem('autosave', content);
+      console.log("Autosaved content...");
+    }, 30000);
+
+    // Load autosaved content if available
+    window.addEventListener('load', function() {
+      const autosaveContent = localStorage.getItem('autosave');
+      if (autosaveContent) {
+        textArea.value = autosaveContent;
+        console.log("Loaded autosaved content...");
+      }
+    });
+
+    // Initialize with the current state
+    saveStateToUndoStack();
+  </script>
+</body>
+</html>
