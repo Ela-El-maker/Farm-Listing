@@ -25,12 +25,29 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // dd(Auth::guard('admin')->attempt($request->only('email', 'password')));
+
         $request->authenticate('admin');
 
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
     }
+    // public function store(Request $request)
+    // {
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::guard('admin')->attempt($credentials)) {
+    //         $request->session()->regenerate();
+
+    //         return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
+    //     }
+
+    //     return back()->withErrors([
+    //         'email' => 'These credentials do not match our records.',
+    //     ]);
+    // }
+
 
     /**
      * Destroy an authenticated session.
