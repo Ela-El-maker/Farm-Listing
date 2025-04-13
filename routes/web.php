@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\Rentee\RenteeDashboardController;
+use App\Http\Controllers\Frontend\Renter\RenterDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,7 +46,7 @@ Route::group(
         'as' => 'rentee.',
     ],
     function () {
-        // Route::get('/dashboard', [CandidateDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [RenteeDashboardController::class, 'index'])->name('dashboard');
         // Route::get('/profile', [CandidateProfileController::class, 'index'])->name('profile.index');
         // Route::post('/profile/basic-info-update', [CandidateProfileController::class, 'basicInfoUpdate'])->name('profile.basic-info.update');
         // Route::post('/profile/profile-info-update', [CandidateProfileController::class, 'profileInfoUpdate'])->name('profile.profile-info.update');
@@ -71,7 +73,7 @@ Route::group(
     ],
     function () {
         // Dashboard
-        // Route::get('/dashboard', [CompanyDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [RenterDashboardController::class, 'index'])->name('dashboard');
         //  Company Profile Routes
         // Route::get('/profile', [CompanyProfileController::class, 'index'])->name('profile');
         // Route::post('/profile/company-info', [CompanyProfileController::class, 'updateCompanyInfo'])->name('profile.company-info');
