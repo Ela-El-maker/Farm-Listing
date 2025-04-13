@@ -1,23 +1,30 @@
 <div class="col-xl-3">
     <div class="dashboard__navigation">
         <div class="dashboard__navigation-top">
-            <div class="dashboard__user-proifle">
-                <div class="dashboard__user-img">
-                    <img src="./src/images/users/img-01.png" alt="user-photo" />
+            <a href="{{ route('rentee.profile.index') }}" style="text-decoration: none;">
+                <div class="dashboard__user-proifle" style="text-align: center; padding: 20px;">
+                    <div class="dashboard__user-img">
+                        <img src="{{ asset(auth()->user()?->image ?? 'default-uploads/avatar/male.png') }}"
+                            alt="user-photo"
+                            onerror="this.onerror=null; this.src='{{ asset('default-uploads/avatar/male.png') }}';"
+                            style="width: 100%; height: 100%; object-fit: cover;" />
+                    </div>
+
+                    <div class="dashboard__user-info" style="margin-top: 15px;">
+                        <h2 class="name text--body-2-600"
+                            style="margin: 10px 0 5px; font-size: 20px; font-weight: 600; color: #2c3e50;">
+                            {{ auth()->user()?->name }}
+                        </h2>
+                        <p class="designation text--body-4" style="font-size: 14px; color: #7f8c8d;">
+                            @if (auth()->user()?->role === 'rentee')
+                                🧰 Rentee
+                            @elseif (auth()->user()?->role === 'renter')
+                                🚜 Renter
+                            @endif
+                        </p>
+                    </div>
                 </div>
-                <div class="dashboard__user-info">
-                    <h2 class="name text--body-2-600">
-                        {{ auth()->user()?->name }}
-                    </h2>
-                    <p class="designation text--body-4">
-                        @if (auth()->user()->role === 'rentee')
-                            Rentee
-                        @elseif (auth()->user()->role === 'renter')
-                            Renter
-                        @endif
-                    </p>
-                </div>
-            </div>
+            </a>
         </div>
         <div class="dashboard__navigation-bottom">
             <ul class="dashboard__nav">
@@ -154,18 +161,19 @@
                     </a>
                 </li>
                 <li class="dashboard__nav-item">
-                    <a href="{{ route('logout') }}" class="dashboard__nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="{{ route('logout') }}" class="dashboard__nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <span class="icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.3135 8.0625L20.2499 12L16.3135 15.9375" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M9.75 12H20.2472" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.3135 8.0625L20.2499 12L16.3135 15.9375" stroke="currentColor"
+                                    stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M9.75 12H20.2472" stroke="currentColor" stroke-width="1.6"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                                 <path
                                     d="M9.75 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V4.5C3.75 4.30109 3.82902 4.11032 3.96967 3.96967C4.11032 3.82902 4.30109 3.75 4.5 3.75H9.75"
-                                    stroke="currentColor"
-                                    stroke-width="1.6"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
+                                    stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </span>
                         Sign Out

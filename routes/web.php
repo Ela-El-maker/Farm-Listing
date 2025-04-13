@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\Rentee\RenteeDashboardController;
+use App\Http\Controllers\Frontend\Rentee\RenteeProfileController;
 use App\Http\Controllers\Frontend\Renter\RenterDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,8 @@ Route::group(
     ],
     function () {
         Route::get('/dashboard', [RenteeDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/profile', [RenteeProfileController::class,'index'])->name('profile.index');
+        Route::post('/profile/basic-info-update',  [RenteeProfileController::class, 'basicInfoUpdate'])->name('profile.basic-info-update');
         // Route::get('/profile', [CandidateProfileController::class, 'index'])->name('profile.index');
         // Route::post('/profile/basic-info-update', [CandidateProfileController::class, 'basicInfoUpdate'])->name('profile.basic-info.update');
         // Route::post('/profile/profile-info-update', [CandidateProfileController::class, 'profileInfoUpdate'])->name('profile.profile-info.update');
