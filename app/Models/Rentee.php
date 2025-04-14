@@ -15,7 +15,8 @@ class Rentee extends Model
         'profile_image',
         'title',
         'phone',
-        'email'
+        'email',
+        'banner'
     ];
 
 

@@ -14,13 +14,17 @@
         href="{{ asset('frontend/assets/src/images/favicon_io/favicon-32x32.png') }}" />
     <link rel="icon" type="image/png" sizes="16x16"
         href="{{ asset('frontend/assets/src/images/favicon_io/favicon-16x16.png') }}" />
+
     <link rel="manifest" href="{{ asset('frontend/assets/src/images/favicon_io/site.webmanifest') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/assets/src/plugins/select2/css/select2.min.css') }}" />
-    <link rel="stylesheet"
-        href="{{ asset('frontend/assets/src/plugins/select2/css/select2-bootstrap-5-theme.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('frontend/assets/src/plugins/select2/css/select2.min.css') }}" /> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('frontend/assets/src/plugins/select2/css/select2-bootstrap-5-theme.css') }}" /> --}}
     <link rel="stylesheet" href="{{ asset('frontend/assets/src/plugins/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/src/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/src/css/extra.css') }}">
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -54,9 +58,15 @@
     <script src="{{ asset('frontend/assets/src/plugins/jquery.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/src/plugins/lan.js') }}"></script>
     <script src="{{ asset('frontend/assets/src/plugins/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/src/plugins/select2/js/select2.min.js') }}" defer></script>
+    {{-- <script src="{{ asset('frontend/assets/src/plugins/select2/js/select2.min.js') }}" defer></script> --}}
     <script src="{{ asset('frontend/assets/src/plugins/bvselect.js') }}"></script>
-    <script src="{{ asset('frontend/assets/src/plugins/select2/js/select2.min.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/assets/src/plugins/select2/js/select2.min.js') }}"></script> --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/goodshare.js@6/goodshare.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('frontend/assets/src/js/app.js') }}"></script>
 
     @stack('scripts')

@@ -24,8 +24,9 @@ class RenteeProfileRequest extends FormRequest
         return [
             "name" => "required|string",
             "email" => "required|email",
-            "phone" => "required|string", 
-            "profile_image" => "required|mimes:png,jpeg,jpg,webp|max:4000",
+            "phone" => "required|string",
+            "profile_image" => "mimes:png,jpeg,jpg,webp|max:4000",
+            "banner" => "mimes:png,jpeg,jpg,webp|max:4000",
             "title" => "required|string",
         ];
 

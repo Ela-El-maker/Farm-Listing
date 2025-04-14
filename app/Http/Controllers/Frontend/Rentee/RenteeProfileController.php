@@ -15,7 +15,8 @@ class RenteeProfileController extends Controller
     //
     public function index() : View
     {
-        return view('frontend.rentee-dashboard.profile.index');
+        $rentee = Rentee::where('user_id', auth()->user()->id)->first();
+        return view('frontend.rentee-dashboard.profile.index',compact('rentee'));
     }
 
     public function basicInfoUpdate(RenteeProfileRequest $request)
@@ -35,8 +36,11 @@ class RenteeProfileController extends Controller
     {
         $data = [];
         $imagePath = $this->uploadFile($request, 'profile_image');
+        $bannerPath = $this->uploadFile($request, 'banner');
+
 
         if (!empty($imagePath)) $data['profile_image'] = $imagePath;
+        if (!empty($bannerPath)) $data['banner'] = $bannerPath;
 
         return $data;
     }

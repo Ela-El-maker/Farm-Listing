@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,5 +46,17 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
 
     /**** Dashboard Route */
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+      /**** Countries Route */
+      Route::resource('countries', CountryController::class);
+
+    //   /**** States Route */
+    //   Route::resource('states', StateController::class);
+    //   /**** Cities Route */
+    //   Route::resource('cities', CityController::class);
+
+    //   Route::get('get-states/{country_id}', [LocationController::class, 'getStatesOfCountry'])->name('get-states');
+
 
 });

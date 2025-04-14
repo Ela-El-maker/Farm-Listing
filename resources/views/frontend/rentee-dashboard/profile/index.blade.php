@@ -139,14 +139,20 @@
 @push('scripts')
     <!-- JavaScript for Image Preview -->
 <script>
-     function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function () {
-            var output = document.getElementById('image-preview');
-            output.style.display = 'block'; // Show the preview
-            output.src = reader.result; // Set the source to the image selected
-        };
-        reader.readAsDataURL(event.target.files[0]); // Read the file as data URL
+     function previewImage(event, previewId) {
+        const input = event.target;
+        const preview = document.getElementById(previewId);
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 </script>
 @endpush

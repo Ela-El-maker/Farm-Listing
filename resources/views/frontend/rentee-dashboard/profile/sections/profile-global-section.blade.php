@@ -1,52 +1,56 @@
 <div class="tab-pane fade" id="pills-advance" role="tabpanel" aria-labelledby="pills-advance-tab">
     <form action="" method="post">
         <div class="dashboard-post__step02 step-information">
-            <div class="input-field--textarea">
-                <label for="description">Ad description</label>
-                <textarea placeholder="What’s your thought..." id="description"></textarea>
+
+            <div class="input-field__group">
+
+                <div class="input-field">
+                    <label for="website">Website Link <span>(optional)</span></label>
+                    <input type="text" name="website" placeholder="your website url" id="website" />
+                </div>
             </div>
-            <div class="input-field--textarea">
-                <label for="feature">Feature <span>(optional)</span> </label>
-                <textarea placeholder="Write a feature in each line..." id="feature"></textarea>
-            </div>
-            <div class="upload-wrapper">
-                <h3>Upload Photos</h3>
-                <div class="upload-area">
-                    <div class="uploaded-items">
-                        <div class="uploaded-item">
-                            <img src="./src/images/blogs/img-02.png" alt="">
-                            <div class="remove-icon">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            </div>
-                        </div>
-                        <div class="uploaded-item">
-                            <img src="./src/images/blogs/img-03.png" alt="">
-                            <div class="remove-icon">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-select">
+                        <label>country</label>
+                        <select class="form-control js-example-basic-single w-100" name="country">
+                            <option value="01">country 01</option>
+                            <option value="02">country 02</option>
+                            <option value="03">country 03</option>
+                            <option value="04">country 04</option>
+                        </select>
                     </div>
-                    <div class="add-new">
-                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                        <input type="file" hidden id="addNew">
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-field__group">
+                        <div class="input-select">
+                            <label>city</label>
+                            <select class="js-example-basic-single w-100" name="city">
+                                <option value="01">city 01</option>
+                                <option value="02">city 02</option>
+                                <option value="03">city 03</option>
+                                <option value="04">city 04</option>
+                            </select>
+                        </div>
+                        <div class="input-select">
+                            <label>state <span>(optional)</span> </label>
+                            <select class="form-control js-example-basic-single w-100" name="state">
+                                <option value="01">state 01</option>
+                                <option value="02">state 02</option>
+                                <option value="03">state 03</option>
+                                <option value="04">state 04</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="dashboard-post__action-btns">
-                <a href="#" class="btn btn--lg btn--outline">
-                    Previous
-                </a>
-                <a href="#" class="btn btn--lg">
-                    Next Steps
-                    <span class="icon--right">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3.75 12H20.25" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M13.5 5.25L20.25 12L13.5 18.75" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                </a>
+            <div class="input-field--textarea">
+                <label for="description">Biography</label>
+                <textarea name="bio" placeholder="What’s your thought..." id="editor"></textarea>
             </div>
         </div>
+        <button type="submit" class="btn">
+            Save Changes
+        </button>
     </form>
 </div>

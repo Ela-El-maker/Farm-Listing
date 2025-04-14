@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
             $table->string('profile_image')->nullable();
+            $table->string('banner')->nullable();
             $table->text('bio')->nullable();
+            $table->string('website')->nullable();
             $table->foreignId('city')->nullable();
             $table->foreignId('state')->nullable();
             $table->foreignId('country')->nullable();
